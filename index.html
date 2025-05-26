@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,70 +9,66 @@
     function toggleDarkMode() {
       document.documentElement.classList.toggle('dark');
     }
-
     function filterPosts(query) {
       const cards = document.querySelectorAll(".blog-card");
       cards.forEach(card => {
         const title = card.querySelector("h3").textContent.toLowerCase();
-        const show = title.includes(query.toLowerCase());
-        card.style.display = show ? "block" : "none";
+        card.style.display = title.includes(query.toLowerCase()) ? "block" : "none";
       });
     }
   </script>
 </head>
-
 <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans">
-  <!-- Header and Nav -->
-  <header class="bg-yellow-400 dark:bg-yellow-600 p-4 shadow-md">
+
+  <!-- Header -->
+  <header class="bg-teal-500 dark:bg-teal-700 p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">QuickGold Daily</h1>
+      <h1 class="text-2xl font-bold text-white">QuickGold Daily</h1>
       <div class="flex items-center space-x-4">
-        <input type="text" placeholder="Search..." class="px-3 py-2 rounded-md text-sm text-black"
+        <input type="text" placeholder="Search..."
+          class="px-3 py-2 rounded-md text-sm text-black focus:outline-none"
           oninput="filterPosts(this.value)" />
         <button onclick="toggleDarkMode()"
-          class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded-full">Toggle Mode</button>
+          class="bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 rounded-full shadow">
+          Toggle Mode
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="container mx-auto px-4 py-6">
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Featured Hacks</h2>
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Featured Hacks</h2>
       <div id="postGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Blog Cards -->
+
+        <!-- Blog Card 1 -->
         <div class="blog-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?q=80&w=696&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tech Tool"
-            class="w-full h-40 object-cover" />
+          <img src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?q=80&w=696&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI Tool" class="w-full h-40 object-cover" />
           <div class="p-4">
             <h3 class="text-lg font-bold mb-1">This Free Tool Will Save You Hours</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              Discover how this AI tool is making people more productive.
-            </p>
-            <a href="save_time_ai_tool.html"
-              class="text-yellow-600 dark:text-yellow-400 font-semibold">Read more</a>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Discover how this AI tool is making people more productive.</p>
+            <a href="save_time_ai_tool.html" class="text-teal-600 dark:text-teal-400 font-semibold">Read more</a>
           </div>
         </div>
 
+        <!-- Blog Card 2 -->
         <div class="blog-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
           <img src="https://images.unsplash.com/photo-1635840420670-5470266ffa39?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Money Hack" class="w-full h-40 object-cover" />
           <div class="p-4">
             <h3 class="text-lg font-bold mb-1">5 Hacks That Will Save You Money Daily</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              Simple, actionable steps you can take today to cut expenses.
-            </p>
-            <a href="#" class="text-yellow-600 dark:text-yellow-400 font-semibold">Read more</a>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Simple, actionable steps you can take today to cut expenses.</p>
+            <a href="#" class="text-teal-600 dark:text-teal-400 font-semibold">Read more</a>
           </div>
         </div>
 
+        <!-- Blog Card 3 -->
         <div class="blog-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?q=80&w=876&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Productivity"
-            class="w-full h-40 object-cover" />
+          <img src="https://images.unsplash.com/photo-1603468620905-8de7d86b781e?q=80&w=876&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Productivity" class="w-full h-40 object-cover" />
           <div class="p-4">
             <h3 class="text-lg font-bold mb-1">Your New Morning Routine</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              Boost your energy, focus, and creativity before 9AM.
-            </p>
-            <a href="#" class="text-yellow-600 dark:text-yellow-400 font-semibold">Read more</a>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Boost your energy, focus, and creativity before 9AM.</p>
+            <a href="#" class="text-teal-600 dark:text-teal-400 font-semibold">Read more</a>
           </div>
         </div>
       </div>
@@ -82,8 +77,9 @@
 
   <!-- Floating CTA -->
   <div class="fixed bottom-4 right-4">
-    <a href="#" class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-3 rounded-full shadow-lg transition-all">Get
-      Today’s Top Hack</a>
+    <a href="#" class="bg-teal-600 hover:bg-teal-700 text-white px-5 py-3 rounded-full shadow-lg transition-all">
+      Get Today’s Top Hack
+    </a>
   </div>
 
   <!-- Footer -->
@@ -91,5 +87,4 @@
     <p>&copy; 2025 QuickGold Daily. Built for impact. Stay golden.</p>
   </footer>
 </body>
-
 </html>
