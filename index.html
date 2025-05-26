@@ -81,35 +81,49 @@
       Get Today’s Top Hack
     </a>
   </div>
-<!-- Newsletter Signup Section with Animation and Confirmation -->
+
+  <!-- Newsletter Signup Section -->
 <section class="bg-gray-50 dark:bg-gray-800 py-12 mt-12 animate-fade-in">
   <div class="max-w-2xl mx-auto text-center px-4">
     <h2 class="text-2xl md:text-3xl font-bold mb-4">Join the QuickGold Newsletter</h2>
     <p class="text-gray-600 dark:text-gray-400 mb-6">
       Get the latest hacks, tools, and productivity secrets delivered straight to your inbox—no spam, just gold.
     </p>
+    
+<!-- Newsletter Signup Section -->
+<section class="bg-gray-50 dark:bg-gray-800 py-12 mt-12 animate-fade-in">
+  <div class="max-w-2xl mx-auto text-center px-4">
+    <h2 class="text-2xl md:text-3xl font-bold mb-4">Join the QuickGold Newsletter</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-6">
+      Get the latest hacks, tools, and productivity secrets delivered straight to your inbox—no spam, just gold.
+    </p>
+    
     <form
       id="newsletterForm"
-      action="https://formspree.io/f/meogbvja"  <!-- Replace with your Formspree endpoint -->
+      action="https://formspree.io/f/your-form-id"
       method="POST"
       class="flex flex-col md:flex-row gap-4 justify-center"
       onsubmit="return showConfirmation(event)"
     >
       <input type="text" name="name" placeholder="Your name" required
         class="px-4 py-3 rounded-lg w-full md:w-1/3 border focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white transition" />
+      
       <input type="email" name="email" placeholder="Your email" required
         class="px-4 py-3 rounded-lg w-full md:w-1/3 border focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white transition" />
+      
       <button type="submit"
         class="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-lg transition">
         Subscribe
       </button>
     </form>
+    
     <p id="confirmationMsg" class="mt-4 text-green-600 dark:text-green-400 hidden">
       Thank you for subscribing! Check your inbox soon.
     </p>
   </div>
 </section>
 
+<!-- Animation -->
 <style>
   @keyframes fade-in {
     from { opacity: 0; transform: translateY(30px); }
@@ -120,9 +134,10 @@
   }
 </style>
 
+<!-- JavaScript for confirmation -->
 <script>
   function showConfirmation(e) {
-    e.preventDefault(); // Prevent default form behavior
+    e.preventDefault();
 
     const form = document.getElementById("newsletterForm");
     const msg = document.getElementById("confirmationMsg");
@@ -145,6 +160,7 @@
     return false;
   }
 </script>
+  
   <!-- Footer -->
   <footer class="bg-gray-100 dark:bg-gray-800 text-center py-6 mt-12 text-sm text-gray-500 dark:text-gray-400">
     <p>&copy; 2025 QuickGold Daily. Built for impact. Stay golden.</p>
