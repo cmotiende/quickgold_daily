@@ -2,167 +2,49 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>QuickGold Daily</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 
-  <!-- Navigation -->
-  <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <h1 class="text-2xl font-bold">QuickGold Daily</h1>
-      <nav class="space-x-4 text-sm">
-        <a href="index.html" class="hover:underline text-teal-600">Home</a>
-        <a href="new_post.html" class="hover:underline text-teal-600">+ Add Post</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="bg-teal-600 text-white py-16 text-center px-4">
-    <h2 class="text-4xl font-bold mb-4">Discover Life Hacks, AI Tools & Productivity Gold</h2>
-    <p class="text-lg">Fresh insights every day. Stay smart. Stay ahead.</p>
-  </section>
-
-  <!-- Dynamic Blog Section -->
-  <section class="py-12 bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-10">Latest Posts</h2>
-      <div id="blogContainer" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div id="posts" class="space-y-6 max-w-3xl mx-auto p-4"></div>
-
-<script>
-  const SUPABASE_URL = 'https://your-project.supabase.co';
-  const SUPABASE_KEY = 'your-anon-key';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  async function loadPosts() {
-    const { data: posts, error } = await supabase
-      .from('posts')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    const container = document.getElementById('posts');
-    if (error) {
-      container.innerHTML = '<p>Error loading posts.</p>';
-      return;
-    }
-
-    posts.forEach(post => {
-      container.innerHTML += `
-        <div class="border rounded-xl p-4 shadow">
-          <img src="${post.image}" class="w-full h-48 object-cover rounded mb-2" />
-          <h2 class="text-xl font-bold">${post.title}</h2>
-          <p class="text-gray-600 dark:text-gray-400">${post.summary}</p>
-        </div>
-      `;
-    });
-  }
-
-  loadPosts();
-</script>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter Signup Section -->
-  <section class="bg-gray-50 dark:bg-gray-800 py-12 mt-12 animate-fade-in">
-    <div class="max-w-2xl mx-auto text-center px-4">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">Join the QuickGold Newsletter</h2>
-      <p class="text-gray-600 dark:text-gray-400 mb-6">
-        Get the latest hacks, tools, and productivity secrets delivered straight to your inbox—no spam, just gold.
-      </p>
-
-      <form
-        id="newsletterForm"
-        action="https://formspree.io/f/meogbvja"
-        method="POST"
-        class="flex flex-col md:flex-row gap-4 justify-center"
-        onsubmit="return showConfirmation(event)"
-      >
-        <input type="text" name="name" placeholder="Your name" required
-          class="px-4 py-3 rounded-lg w-full md:w-1/3 border focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white transition" />
-        <input type="email" name="email" placeholder="Your email" required
-          class="px-4 py-3 rounded-lg w-full md:w-1/3 border focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white transition" />
-        <button type="submit"
-          class="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-6 py-3 rounded-lg transition">
-          Subscribe
-        </button>
-      </form>
-      <p id="confirmationMsg" class="mt-4 text-green-600 dark:text-green-400 hidden">
-        Thank you for subscribing! Check your inbox soon.
-      </p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-100 dark:bg-gray-800 text-center py-6 mt-12">
-    <p class="text-sm text-gray-600 dark:text-gray-400">
-      © 2025 QuickGold Daily. Made with focus & coffee.
-    </p>
-  </footer>
-
-  <!-- Styles + Scripts -->
-  <style>
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-      animation: fade-in 0.8s ease-out both;
-    }
-  </style>
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-4xl font-bold mb-6 text-center">QuickGold Daily</h1>
+    <div id="posts" class="space-y-6"></div>
+  </div>
 
   <script>
-    // Newsletter form confirmation
-    function showConfirmation(e) {
-      e.preventDefault();
-      const form = document.getElementById("newsletterForm");
-      const msg = document.getElementById("confirmationMsg");
+    const SUPABASE_URL = 'https://your-project.supabase.co'; // Replace with your Supabase URL
+    const SUPABASE_KEY = 'your-anon-key'; // Replace with your Supabase Anon Key
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
-      })
-      .then(response => {
-        if (response.ok) {
-          form.reset();
-          msg.classList.remove("hidden");
-        } else {
-          alert("There was an issue. Please try again.");
-        }
-      })
-      .catch(() => alert("Error submitting form."));
-      return false;
-    }
+    async function loadPosts() {
+      const { data: posts, error } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-    // Load posts from localStorage
-    const blogContainer = document.getElementById('blogContainer');
-    const posts = JSON.parse(localStorage.getItem('quickgold_posts')) || [];
+      const container = document.getElementById('posts');
+      if (error) {
+        container.innerHTML = '<p>Error loading posts.</p>';
+        return;
+      }
 
-    if (posts.length === 0) {
-      blogContainer.innerHTML = '<p class="text-center text-gray-500 dark:text-gray-400 col-span-3">No posts yet. Add one <a href="new_post.html" class="text-teal-600 underline">here</a>.</p>';
-    } else {
       posts.forEach(post => {
-        const card = document.createElement('div');
-        card.className = 'bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition hover:scale-[1.02]';
-        card.innerHTML = `
-          <img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover">
-          <div class="p-4">
-            <h3 class="text-xl font-semibold mb-2">${post.title}</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">${new Date(post.date).toLocaleDateString()}</p>
-            <p class="text-base text-gray-700 dark:text-gray-300 mb-4">${post.summary}</p>
-            ${post.body ? `<details><summary class="cursor-pointer text-teal-600 font-medium">Read more</summary><p class="mt-2 text-sm">${post.body}</p></details>` : ''}
+        container.innerHTML += `
+          <div class="border rounded-xl p-4 shadow">
+            <img src="${post.image}" class="w-full h-48 object-cover rounded mb-2" />
+            <h2 class="text-xl font-bold">
+              <a href="view_post.html?slug=${post.slug}" class="text-teal-600 hover:underline">${post.title}</a>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400">${post.summary}</p>
           </div>
         `;
-        blogContainer.appendChild(card);
       });
     }
-  </script>
 
+    loadPosts();
+  </script>
 </body>
 </html>
