@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Post | QuickGold Daily</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+
+  <div class="max-w-3xl mx-auto p-6">
+    <div id="post" class="space-y-6"></div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://your-project.supabase.co'; // Replace with your Supabase URL
+    const SUPABASE_KEY = 'your-anon-key'; // Replace with your Supabase Anon Key
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    async function loadPost() {
+      const { data: posts, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('slug', slug)
+        .limit(1);
+
+      const container = document.getElementById('post');
+      if (error || posts.length === 0) {
+        container.innerHTML = '<p>Post not found.</p>';
+        return;
+      }
+
+      const post = posts[0];
+      container.innerHTML = `
+        <h1 class="text-3xl font-bold">${post.title}</h1>
+        <p class="text-gray-600 dark:text-gray-400">Published on ${new Date(post.created_at).toLocaleDateString()}</p>
+        <img src="${post.image}" class="w-full h-64 object-cover rounded mb-4" />
+        <p class="text-lg">${post.body}</p>
+        <a href="index.html" class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-full mt-4">Back to Home</a>
+      `;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>
