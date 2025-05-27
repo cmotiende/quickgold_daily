@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Add New Post | QuickGold Daily</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 
@@ -35,56 +35,35 @@
   </div>
 
   <script>
-    /*const form = document.getElementById('postForm');
+    const SUPABASE_URL = 'https://your-project.supabase.co'; // Replace with your Supabase URL
+    const SUPABASE_KEY = 'your-anon-key'; // Replace with your Supabase Anon Key
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const form = document.getElementById('postForm');
     const successMsg = document.getElementById('successMsg');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      const title = document.getElementById('title').value;
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const post = {
-        title: document.getElementById('title').value,
+        title,
+        slug,
         image: document.getElementById('image').value,
         summary: document.getElementById('summary').value,
-        body: document.getElementById('body').value,
-        date: new Date().toISOString()
+        body: document.getElementById('body').value
       };
 
-      let posts = JSON.parse(localStorage.getItem('quickgold_posts')) || [];
-      posts.unshift(post);
-      localStorage.setItem('quickgold_posts', JSON.stringify(posts));
+      const { error } = await supabase.from('posts').insert([post]);
 
-      form.reset();
-      successMsg.classList.remove('hidden');
-    });*/
-  const SUPABASE_URL = 'https://your-project.supabase.co';
-  const SUPABASE_KEY = 'your-anon-key';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  const form = document.getElementById('postForm');
-  const successMsg = document.getElementById('successMsg');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById('title').value;
-    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const post = {
-      title,
-      slug,
-      image: document.getElementById('image').value,
-      summary: document.getElementById('summary').value,
-      body: document.getElementById('body').value
-    };
-
-    const { error } = await supabase.from('posts').insert([post]);
-
-    if (error) {
-      alert('Failed to save post: ' + error.message);
-    } else {
-      form.reset();
-      successMsg.classList.remove('hidden');
-    }
-  });
-</script>
+      if (error) {
+        alert('Failed to save post: ' + error.message);
+      } else {
+        form.reset();
+        successMsg.classList.remove('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
